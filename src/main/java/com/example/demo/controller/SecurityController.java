@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SecurityController {
 	
-	@GetMapping("/login")
+	@GetMapping("/index")
 	public String login() {
-		return "login";
+		return "index";
 	}
 	// 認証済みのユーザー情報を取得する
 	@GetMapping
