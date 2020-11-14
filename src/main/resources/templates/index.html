@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<title>ルセット一覧</title>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/menus">メニュー管理</a>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="card card-primary mb-3">
+			<div class="card-header">
+				<h5 class="card-title">
+					メニューリスト<a href="/menus/new" class="btn btn-success float-right">新規</a>
+				</h5>
+			</div>
+			<div class="card-body" th:if="!${menus.size()}">
+				<p>メニューがありません</p>
+			</div>
+			<table class="table table-striped" th:if="${menus.size()}">
+				<thead>
+					<tr>
+						<th style="width: 10%">ID</th>
+						<th style="width: 30%">タイトル</th>
+						<th style="width: 10%">コース</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="menu:${menus}" th:object="${menu}">
+						<td th:text="*{id}"></td>
+						<td th:text="*{title}"></td>
+						<td th:text="*{cource}"></td>
+						<td class="float-right">
+						<form th:action="@{/menus/{id}(id=*{id})}" th:method="delete">
+							<a class="btn btn-primary" th:href="@{/menus/{id}(id=*{id})}">詳細</a>
+							<a class="btn btn-primary"
+								th:href="@{/menus/{id}/edit(id=*{id})}">変更</a>
+							<button class="btn btn-primary">削除</button>
+						</form>
+						</td>
+						</tr>
+				</tbody>
+			</table>
+			<form th:action="@{/logout}" method="post">
+			  <button>ログアウト</button>
+			</form>
+		</div>
+	</div>
+	<script src="/js/jquery-3.5.1.min"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
